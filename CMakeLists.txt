@@ -43,7 +43,15 @@ include(TriWildDownloadExternal)
 
 triwild_download_aabbcc()
 triwild_download_geogram()
-triwild_download_igl()
+
+include(FetchContent)
+FetchContent_Declare(
+    libigl
+    GIT_REPOSITORY https://github.com/libigl/libigl.git GIT_TAG
+    a221faf1e4bd571529ca2101c08bc2458579b1da
+)
+FetchContent_MakeAvailable(libigl)
+
 triwild_download_nlopt()
 
 ################################################################################
@@ -73,7 +81,6 @@ option(LIBIGL_WITH_OPENGL_GLFW       "Use GLFW"           OFF)
 option(LIBIGL_WITH_OPENGL_GLFW_IMGUI "Use ImGui"          OFF)
 option(LIBIGL_WITH_VIEWER            "Use OpenGL viewer"  OFF)
 
-find_package(LIBIGL REQUIRED QUIET)
 find_package(GMPTriWild)
 
 IF(NOT ${GMP_FOUND})
